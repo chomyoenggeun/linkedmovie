@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="204" height="204" viewBox="0 0 204 204">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #081520;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <circle id="타원_5" data-name="타원 5" class="cls-1" cx="102" cy="102" r="102" transform="translate(-3660 -769)"/>
+    </clipPath>
+  </defs>
+  <g id="마스크_그룹_2" data-name="마스크 그룹 2" class="cls-2" transform="translate(3660 769)">
+    <circle id="타원_4" data-name="타원 4" class="cls-1" cx="102" cy="102" r="102" transform="translate(-3762 -820)"/>
+  </g>
+</svg>

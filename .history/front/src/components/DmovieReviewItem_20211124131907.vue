@@ -1,0 +1,89 @@
+<template>
+  <div>
+    <router-link :to="{name:'MovieReviewCommunity',params:{ reviewId:review.id }}" >
+      
+      <div>
+        영화 작성 글 : {{ moviereview.content }}
+        <br>
+        영화 제목 : {{ moviereview.movie_title }}
+        <br>
+        랭크 : {{ moviereview.rank }}
+        <br>
+        내용 : {{ moviereview.title }}
+        <br>
+        작성유저 : {{ moviereview.user }}
+      </div>
+    </router-link>    
+      
+        <!-- <span v-if="user === review.user">
+        </span> -->
+          <!-- <button @click="updateReview">
+            <v-expansion-panel-header>
+              수정
+            </v-expansion-panel-header>
+          </button> -->
+          <button @click="deleteReview">
+            삭제
+          </button>
+      
+    <br>
+  </div>
+</template>
+
+<script>
+export default {
+  name : 'DmovieReviewItem',
+  props: {
+    moviereview: {
+      type: Object,
+      required: true
+    }
+  },
+  data(){
+    return{
+      reviewItem:{
+        title: this.review.title,
+        movie: this.review.movie_title,
+        rank: this.review.rank,
+        content: this.review.content
+      },
+    }
+  },
+  // created: function(){
+  //   this.$store.dispatch('getLoginUser',this.setToken())
+  // },
+  methods:{
+    setToken(){
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    updateReview(){
+      const reviewItemSet = {
+        reviewItem : this.reviewItem,
+        review_id : this.moviereview.id,
+        token: this.setToken()
+      }
+      console.log(reviewItemSet)
+      this.$store.dispatch('updateReview',reviewItemSet)
+    },
+    deleteReview(){
+      const reviewItemSet = {
+        review_id : this.review.id,
+        token: this.setToken()
+      }
+      
+      this.$store.dispatch('deleteReview',reviewItemSet)
+    }
+  },
+  created(){
+    console.log(this.review)
+  }
+}
+</script>
+
+<style>
+
+</style>

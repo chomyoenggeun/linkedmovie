@@ -1,0 +1,72 @@
+<template>
+  <div>
+    <h1>영화 리뷰 작성 폼</h1>
+    <div>
+      <v-autocomplete :items="items" v-model="item" :get-label="getLabel" :component-item='template' @update-items="updateItems">
+      </v-autocomplete>
+
+      <v-autocomplete 
+      :items="movieCards"
+      item-text="title"
+      item-value="movie_pk"
+      filled
+      rounded
+      solo
+      ></v-autocomplete>
+
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+export default {
+  name:'DmovieReviewForm',
+  data(){
+    return{
+      movieReviewItem:{
+        title : null,
+        movie_title : null,
+        rank : 5,
+        content : null,
+        movie_pk : null
+      },
+      item: {id: 9, name: 'Lion', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'},
+      items: [],
+      template: ItemTemplate
+    }
+  },
+  methods:{
+    setToken : function(){
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    getLabel (item) {
+      return item.name
+    },
+    updateItems (text) {
+      yourGetItemsMethod(text).then( (response) => {
+        this.items = response
+      })
+    }
+  },
+  created:{
+    getMovieData : function(){
+      this.$store.dispatch('LoadMovieCards',this.setToken())
+    },
+    // for(let movieTitlePk in movieCards){
+    //   console.log(movieTitlePk)
+    // }
+  },
+  computed:{
+    ...mapState(['movieCards']),
+  },
+}
+</script>
+
+<style>
+
+</style>
